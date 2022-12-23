@@ -1,0 +1,86 @@
+1. Membuat Database
+
+ CREATE DATABASE library;
+
+
+2. Membuat Table di Dalam Database
+
+	a. Table users
+
+		CREATE TABLE users( id int(10) AUTO_INCREMENT PRIMARY KEY, name varchar(255) NOT NULL, email varchar(255) NOT NULL, password varchar(255) NOT NULL );
+	
+	b. Table categories
+
+		CREATE TABLE categories( id int(10) AUTO_INCREMENT PRIMARY KEY, name varchar(255) );
+
+	c. Table books
+
+		CREATE TABLE books( id int(10) AUTO_INCREMENT PRIMARY KEY, title varchar(255), summary text, stock int(5), category_id int(5), FOREIGN KEY(category_id) REFERENCES categories(id) );
+
+
+3. Memasukkan Data pada Table
+
+	a. Data table users
+
+		INSERT INTO `users`(`name`, `email`, `password`) VALUES ('John Doe','john@doe.com','john123'),('jane Doe','jane@doe.com','jenita123');
+
+	b. Data table categories
+		
+		INSERT INTO `categories`(`name`) VALUES ("Novel"),("Manga"),("Comic"),("History"),("IT");
+
+	c. Data table books
+
+		- INSERT INTO `books`(`title`, `summary`, `stock`, `category_id`) VALUES ('One piece','The series focuses on Monkey D Luffy, a young man made of rubber',50,2);
+	
+		- INSERT INTO `books`(`title`, `summary`, `stock`, `category_id`) VALUES ('Laskar Pelangi','Belitung is known for its richness in tin, making it one of Indonesias richest islands',25,1);
+		
+		- INSERT INTO `books`(`title`, `summary`, `stock`, `category_id`) VALUES ('Nurmansyah','Mitsuha Miyamizu, a high school girl living in the fictional town of Itomori in Gifu Prefectures',15,2);
+
+4.  Mengambil Data dari Database
+
+	a. Mengambil data users kecuali password
+		
+		SELECT id, name, email FROM users;
+
+	b. Mengambil data Books
+		
+		-  mendapatkan data books pada table items yang memiliki stock di atas 20 buah.
+
+			SELECT * FROM books WHERE stock > 20;
+
+		- mengambil data books pada table books yang memiliki name serupa atau mirip (like) dengan kata kunci “one”, “pela”, atau “ame” (pilih salah satu saja).
+
+			SELECT * FROM `books` WHERE title LIKE "one%";
+
+	c. Menampilkan data items books dengan categories
+
+		SELECT books.title, books.summary, books.stock, books.category_id, categories.name AS category FROM books INNER JOIN categories ON books.category_id = categories.id;
+
+
+5. mengubah data pada table books untuk buku dengan nama One Piece stocknya menjadi 30
+
+	UPDATE `books` SET `stock`= 30 WHERE id = 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			
